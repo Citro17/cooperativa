@@ -1,0 +1,35 @@
+CREATE TABLE IF NOT EXISTS Interventi (
+	ID_Intervento int(11) NOT NULL AUTO_INCREMENT,
+	ID_Operatore int(11) NOT NULL DEFAULT 0,
+	ID_Assistito int(11) NOT NULL DEFAULT 0,
+	Data DATE DEFAULT NULL,
+	Ora_Inizio datetime DEFAULT NULL, 
+	Ora_Fine datetime DEFAULT NULL,
+	Descrizione text DEFAULT NULL,
+	PRIMARY KEY (ID_Intervento),
+	FOREIGN KEY (ID_Operatore) REFERENCES Operatori (ID_Operatore) ON DELETE SET NULL ON UPDATE CASCADE,
+	FOREIGN KEY (ID_Assistito) REFERENCES Assistiti (ID_Assistito) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS Operatori (
+	ID_Operatore int(11) NOT NULL AUTO_INCREMENT,
+	Nome varchar(255) DEFAULT NULL,
+	Cognome varchar(255) DEFAULT NULL,
+	Email varchar(255) DEFAULT NULL,
+	Telefono varchar(255) DEFAULT NULL,
+	PRIMARY KEY (ID_Operatore)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS Assistiti (
+	ID_Assistito int(11) NOT NULL AUTO_INCREMENT,
+	Nome varchar(255) DEFAULT NULL,
+	Cognome varchar(255) DEFAULT NULL,
+	Telefono varchar(255) DEFAULT NULL,
+	Codice_Fiscale varchar(255) DEFAULT NULL,
+	Indirizzo varchar(255) DEFAULT NULL,
+	Email varchar(255) DEFAULT NULL,
+	Comune varchar(255) DEFAULT NULL,
+	Descrizione text DEFAULT NULL,
+	Categoria varchar(255) DEFAULT NULL,
+	PRIMARY KEY (ID_Assistito)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
