@@ -7,15 +7,6 @@
         } 
         session_start();
 
-        // se la pagina è richiesta in get...
-        if($_SERVER["REQUEST_METHOD"] == "GET") {
-
-                // se è stato passato il parametro l=ok cancella la variabile di sessione
-                if($_GET["l"] == "ok") {
-                        unset($_SESSION["username"]);
-                }
-
-        }
 
         // se la pagina è richiesta in post...
         if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -47,6 +38,29 @@ SQL;
                         }
 
                 }
+            }
+        }
+        
+        function inserisciAssistito($nome, $cognome, $indirizzo, $residenza, $codiceFiscale, $telefono, $descrizione){
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+                //leggo
+                $nome = trim($_POST["nome"]);
+                $cognome = trim($_POST["cognome"]);
+                $indirizzo = trim($_POST["indirizzo"]);
+                $residenza = trim($_POST["residenza"]);
+                $codiceFiscale = trim($_POST["codiceFiscale"]);
+                $telefono = trim($_POST["telefono"]);
+                $descrizione = trim($_POST["descrizione"]);
+
+                $query = "INSERT INTO assistiti (Nome, Cognome, Telefono, Codice_Fiscale, Indirizzo, Comune, Descrizione, Categoria) "
+                        . "VALUES ('$nome', '$cognome', '$indirizzo', '$residenza', '$codiceFiscale', '$telefono', '$descrizione')";
+
+                            // Esecuzione della query e controllo degli eventuali errori
+                            if (!$mysqli->query($query)) {
+                                die($mysqli->error);
+                            }
+
             }
         }
     
